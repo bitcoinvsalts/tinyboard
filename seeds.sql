@@ -3,7 +3,7 @@ VALUES ('Anyone have experience training hippos?'),
        ('Found a Spotify playlist that is :fire:'),
        ('Share your best NBA gifs!');
 
-INSERT INTO messages (topic_id, author_initials, author_theme, content, posted)
+INSERT INTO messages (topic_id, author_initials, author_theme, content)
 VALUES (1, 'JK', 'blue', 'Does anyone have experience raising young hippos?<br><br>I''m trying to housetrain one I got for my birthday but we''ve had a few, shall we say, "accidents" so far.<br><br>Training Henry has been far harder than any of the dogs I''ve had!'),
        (1, 'ED', 'red', 'I do!<br><br>So, turns out hippos love iced coffee (weird, I know).<br><br>You''re gonna want to buy a coldbrewer so you have a constant supply.<br><br>Then you can begin training the hippo to actually ring a bell to let you know when he needs to go out. Once he''s come back inside reward him with a bowl of iced coffee. You''ll be surprised how fast he learns.'),
        (2, 'YM', 'green', 'Check out this [Instrumental Lofi playlist on Spotify](https://open.spotify.com/user/spotify/playlist/37i9dQZF1DXc8kgYqQLMfH?si=IfYoL7gyTp-75RCbeEc_9A).<br><br>I''ve been digging so many songs off this.'),

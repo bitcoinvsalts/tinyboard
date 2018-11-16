@@ -29,6 +29,7 @@ before do
 end
 
 after do
+  @db.close
 end
 
 get "/" do
