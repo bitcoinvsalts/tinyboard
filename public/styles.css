@@ -401,7 +401,8 @@ body.dark-mode .topic,
 body.dark-mode .message-footer,
 body.dark-mode .new-topic-wrapper > a,
 body.dark-mode .message-editor,
-body.dark-mode .new-topic-title {
+body.dark-mode .new-topic-title,
+body.dark-mode .message > p > a {
   color: #ffffff;
 }
 
