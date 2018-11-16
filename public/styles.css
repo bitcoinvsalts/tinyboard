@@ -138,6 +138,11 @@ pre code {
   text-align: center;
 }
 
+.topic-title h2 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px
+}
+
 .message {
   background: #fff;
   padding: 20px;
@@ -166,6 +171,10 @@ pre code {
 
 .message p:first-child {
   margin-top: 0;
+}
+
+.message img {
+  max-width: 100%;
 }
 
 .new-message-wrapper {
@@ -282,11 +291,6 @@ pre code {
   align-items: center;
 }
 
-.signup-form:hover {
-  background: #eee;
-  border-color: #ccc;
-}
-
 .signup-form input[type="text"] {
   border: 1px solid #ddd;
   font-size: 18px;
@@ -396,7 +400,8 @@ body.dark-mode,
 body.dark-mode .topic,
 body.dark-mode .message-footer,
 body.dark-mode .new-topic-wrapper > a,
-body.dark-mode .message-editor {
+body.dark-mode .message-editor,
+body.dark-mode .new-topic-title {
   color: #ffffff;
 }
 
@@ -407,8 +412,9 @@ body.dark-mode .new-topic-wrapper > a:hover,
 body.dark-mode .message-editor,
 body.dark-mode .simple-link:hover,
 body.dark-mode .divider,
-body.dark-mode .signup-form {
-  background: #2a2a2a;
+body.dark-mode .signup-form,
+body.dark-mode .new-topic-title {
+  background: #333333;
 }
 
 body.dark-mode .topic:hover,
@@ -416,8 +422,10 @@ body.dark-mode .message,
 body.dark-mode .topic-divider,
 body.dark-mode .new-topic-wrapper > a:hover,
 body.dark-mode .message-editor,
-body.dark-mode .message:not(:first-child):before {
-  border-color: #2a2a2a;
+body.dark-mode .message:not(:first-child):before,
+body.dark-mode .new-topic-title,
+body.dark-mode .topic-title h2 {
+  border-color: #464646;
 }
 
 body.dark-mode pre code {
@@ -483,12 +491,16 @@ pre code.js:before { content: 'JavaScript'; }
   flex-wrap: wrap;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
   .signup-form > section {
     flex-wrap: wrap;
   }
 
   .signup-form > section > label {
     flex: 100%;
+  }
+
+  .new-topic-wrapper > a {
+    text-decoration: underline;
   }
 }
