@@ -493,6 +493,16 @@ pre code.js:before { content: 'JavaScript'; }
 }
 
 @media only screen and (max-width: 500px) {
+  body {
+    padding: 0 10px;
+  }
+
+  .header {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
   .signup-form > section {
     flex-wrap: wrap;
   }
