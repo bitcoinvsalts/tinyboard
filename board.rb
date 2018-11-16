@@ -38,10 +38,12 @@ get "/" do
     SELECT DISTINCT topics.*,
      (SELECT COUNT(messages.id) FROM messages WHERE topic_id = topics.id) AS "message_count",
      (SELECT author_initials FROM messages WHERE topic_id = topics.id ORDER BY posted LIMIT 1) AS "author_initials",
-     (SELECT author_theme FROM messages WHERE topic_id = topics.id ORDER BY posted LIMIT 1) AS "author_theme"
+     (SELECT author_theme FROM messages WHERE topic_id = topics.id ORDER BY posted LIMIT 1) AS "author_theme",
+     (SELECT posted FROM messages WHERE topic_id = topics.id ORDER BY posted DESC LIMIT 1) AS "last_message"
     FROM topics
     INNER JOIN messages
-    ON topics.id = messages.topic_id;
+    ON topics.id = messages.topic_id
+    ORDER BY last_message DESC;
   SQL
 
   topics_result = @db.exec(sql);
