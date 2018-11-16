@@ -1,0 +1,61 @@
+<section class="header">
+  <span class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17" y1="15" x2="9" y2="15"></line></svg>
+    Tinyboard
+  </span>
+</section>
+
+<form class="signup-form" method="post" action="/join">
+  <h4 class="signup-form-header" style="border-bottom: 1px solid #eee;max-width: 300px;padding-bottom: 20px;margin-bottom: 20px;">
+    Join the conversation.
+  </h4>
+
+  <section>
+    <label for="initials" style="flex: 100%;text-align: center;margin-bottom: 5px;color: #6f6f6f;">Two-character initials:</label>
+    <input placeholder="AA" class="mla" name="initials" type="text" style="margin: 0;margin: 0 auto;margin-top: 5px;border-bottom-width: 2px;">
+  </section>
+
+  <section style="justify-content: center;border-bottom: 1px solid #eee;padding-bottom: 20px;">
+    <label style="flex: 100%;text-align: center;margin-bottom: 10px;color: #6f6f6f;">
+      Favorite color:
+    </label>
+
+    <section>
+      <label class="black mla" style="margin-left: 0;">
+        <input name="theme" value="black" type="radio">
+        <span></span>
+      </label>
+
+      <label class="gray">
+        <input name="theme" value="gray" type="radio">
+        <span></span>
+      </label>
+
+      <label class="blue">
+        <input name="theme" value="blue" type="radio" checked="">
+        <span></span>
+      </label>
+
+      <label class="purple">
+        <input name="theme" value="purple" type="radio">
+        <span></span>
+      </label>
+
+      <label class="red">
+        <input name="theme" value="red" type="radio">
+        <span></span>
+      </label>
+
+      <label class="orange">
+        <input name="theme" value="orange" type="radio">
+        <span></span>
+      </label>
+
+      <label class="green">
+        <input name="theme" value="green" type="radio">
+        <span></span>
+      </label>
+    </section>
+  </section>
+  <button type="submit">Join</button>
+</form>
