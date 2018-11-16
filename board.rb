@@ -94,7 +94,7 @@ end
 post "/options" do
   @user = session[:user]
   session[:dark_mode] = (params["darkMode"] == "true")
-  redirect params["prev"]
+  redirect "/"
 end
 
 get "/join" do
