@@ -2,10 +2,7 @@
 
 .text-small { font-size: 12px }
 .mla { margin-left: auto; }
-
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box }
 
 form {
   margin: 0;
@@ -67,11 +64,6 @@ pre code {
   align-items: center;
 }
 
-.topic .user-logo {
-  flex-shrink: 0;
-  margin-right: 10px;
-}
-
 .topic:hover {
   background: #eeeeee;
   border-color: #ddd;
@@ -79,6 +71,10 @@ pre code {
 
 .topic:last-child {
   margin-bottom: 0;
+}
+
+.topic .user-logo {
+  margin-right: 10px;
 }
 
 .topic-stats {
@@ -226,22 +222,14 @@ pre code {
 
 .message-editor {
   width: 100%;
-  background: transparent;
-  transition: 200ms ease background, 200ms ease border;
-  border: 1px solid #ddd;
-  color: #808080;
+  border: 1px solid #eee;
   border-radius: 4px;
   min-height: 150px;
   resize: vertical;
   padding: 10px;
   margin-bottom: 10px;
   font-size: 16px;
-}
-
-.message-editor:focus,
-.message-editor:hover {
   background: #fff;
-  border-color: #eee;
   color: #000;
 }
 
@@ -265,6 +253,7 @@ pre code {
   font-size: 12px;
   font-weight: bold;
   text-shadow: 1px 1px rgba(0,0,0,0.15);
+  flex-shrink: 0;
 }
 
 .message > img {
@@ -288,15 +277,6 @@ pre code {
   background: #fff;
 }
 
-.signup-form-header {
-  text-align: center;
-  display: block;
-  font-weight: bold;
-  letter-spacing: 0px;
-  font-size: 18px;
-  margin: 0 auto 10px auto;
-}
-
 .signup-form > section {
   max-width: 300px;
   display: flex;
@@ -304,6 +284,15 @@ pre code {
   margin: 0 auto 20px auto;
   color: #444;
   align-items: center;
+}
+
+.signup-form-header {
+  text-align: center;
+  display: block;
+  font-weight: bold;
+  letter-spacing: 0px;
+  font-size: 18px;
+  margin: 0 auto 10px auto;
 }
 
 .signup-form input[type="text"] {
@@ -365,13 +354,13 @@ input[type="radio"]:checked + span:after {
   text-shadow: 1px 1px rgba(0,0,0,.15);
 }
 
-label.black > span  { background: #000000; }
+label.red > span    { background: #e61d0e; }
+label.gray > span   { background: #607D8B; }
 label.blue > span   { background: #324ee6; }
+label.black > span  { background: #000000; }
 label.green > span  { background: #4CAF50; }
 label.orange > span { background: #FF9800; }
 label.purple > span { background: #8d18a1; }
-label.red > span    { background: #e61d0e; }
-label.gray > span   { background: #607D8B; }
 
 .divider {
   height: 1px;
@@ -459,13 +448,13 @@ body.dark-mode .message-editor,
 body.dark-mode .message:not(:first-child):before,
 body.dark-mode .new-topic-title,
 body.dark-mode .topic-title h2,
-body.dark-mode .footer {
+body.dark-mode .footer,
+body.dark-mode pre code {
   border-color: #464646;
 }
 
 body.dark-mode pre code {
   background: #313131;
-  border-color: #4a4a4a;
 }
 
 .new-message-header {
@@ -474,23 +463,12 @@ body.dark-mode pre code {
 
 .new-topic-title {
   width: 100%;
-  background: transparent;
-  border: 1px solid #ddd;
-  color: #808080;
+  background: #fff;
+  border: 1px solid #eee;
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 10px;
   font-size: 16px;
-}
-
-pre code {
-  position: relative;
-}
-
-.dark-mode pre code:before {
-  position: absolute;
-  background: #4a4a4a;
-  border-color: #4a4a4a;
 }
 
 .flash {
@@ -514,43 +492,15 @@ pre code {
   flex-wrap: wrap;
 }
 
-.pagination {
-  border: 1px solid #ddd;
-  max-width: 150px;
-  margin: 10px auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-.pagination button {
-  background: #ececec;
-  color: #808080;
-  border: 0;
-  width: 100%;
-  margin: 0;
-  padding: 4px;
-}
-
 @media only screen and (max-width: 500px) {
-  body {
-    padding: 0 10px;
-  }
+  body { padding: 0 10px; }
+  .signup-form > section { flex-wrap: wrap; }
+  .signup-form > section > label { flex: 100%; }
+  .new-topic-wrapper > a { text-decoration: underline; }
 
   .header {
     margin-top: 30px;
     margin-bottom: 10px;
     padding-bottom: 10px;
-  }
-
-  .signup-form > section {
-    flex-wrap: wrap;
-  }
-
-  .signup-form > section > label {
-    flex: 100%;
-  }
-
-  .new-topic-wrapper > a {
-    text-decoration: underline;
   }
 }
