@@ -1,12 +1,12 @@
 <section class="topic-view">
   <section class="topic-title">
     <h2>
-      <%= @title %>
+      <%= @topic[:title] %>
     </h2>
   </section>
 
   <section class="topic-messages">
-    <% @messages.each do |message| %>
+    <% @topic[:messages].each do |message| %>
       <section class="message">
 
         <%== message[:content] %>
