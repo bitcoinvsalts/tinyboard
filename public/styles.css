@@ -1,5 +1,8 @@
 @import url('https://rsms.me/inter/inter-ui.css');
 
+.text-small { font-size: 12px }
+.mla { margin-left: auto; }
+
 * {
   box-sizing: border-box;
 }
@@ -41,6 +44,16 @@ pre code {
   margin-top: 50px;
   margin-bottom: 20px;
   padding-bottom: 20px;
+}
+
+.footer {
+  padding: 20px 0;
+  margin-top: 100px;
+  color: #808080;
+  font-size: 14px;
+  align-items: center;
+  display: flex;
+  border-top: 1px solid #eee;
 }
 
 .topic {
@@ -113,15 +126,10 @@ pre code {
   background: #ddd;
 }
 
-.footer {
-  display: block;
-  padding: 20px 0;
-  text-align: center;
-  color: #a6a6a6;
-}
-
 .logo > svg {
-  width: 24px;
+  width: 18px;
+  margin-left: 2px;
+  margin-bottom: 2px;
 }
 
 .logo {
@@ -132,6 +140,8 @@ pre code {
   font-weight: bold;
   color: #000000;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 
 .logo:hover {
@@ -295,12 +305,14 @@ pre code {
 }
 
 .signup-form input[type="text"] {
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   font-size: 18px;
   padding: 5px;
   border-radius: 4px;
   width: 40px;
   text-align: center;
+  margin: 5px auto 0 auto;
+  border-bottom-width: 2px;
 }
 
 .signup-form input[type="text"]::placeholder {
@@ -339,12 +351,16 @@ input[type="radio"]:checked + span {
 }
 
 input[type="radio"]:checked + span:after {
-  content: '✔';
+  content: '+';
+  transform: rotate(45deg);
   position: absolute;
   color: white;
-  font-size: 18px;
-  top: 4px;
-  left: 8px;
+  font-size: 32px;
+  top: 14px;
+  left: 6px;
+  font-weight: bold;
+  line-height: 0;
+  text-shadow: 1px 1px rgba(0,0,0,.15);
 }
 
 label.black > span  { background: #000000; }
@@ -354,8 +370,6 @@ label.orange > span { background: #FF9800; }
 label.purple > span { background: #8d18a1; }
 label.red > span    { background: #e61d0e; }
 label.gray > span   { background: #607D8B; }
-
-.mla { margin-left: auto; }
 
 .divider {
   height: 1px;
@@ -372,7 +386,6 @@ label.gray > span   { background: #607D8B; }
 }
 
 .theme-controller {
-  color: #a6a6a6;
   display: inline-flex;
   align-items: center;
   margin-left: 10px;
@@ -382,17 +395,28 @@ label.gray > span   { background: #607D8B; }
 }
 
 .theme-controller svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .simple-link {
   padding: 5px;
   border-radius: 4px;
+  color: #a6a6a6;
+  display: inline-flex;
+  font-weight: bold;
+  align-items: center;
+  text-decoration: none;
+  transition: 200ms ease background, 200ms ease color;
+}
+
+.simple-link > svg.feather-message-square {
+  margin-left: 2px;
 }
 
 .simple-link:hover {
   background: #ececec;
+  color: #808080;
 }
 
 body.dark-mode {
@@ -406,7 +430,8 @@ body.dark-mode .new-topic-wrapper > a,
 body.dark-mode .message-editor,
 body.dark-mode .new-topic-title,
 body.dark-mode .message > p > a,
-body.dark-mode .logo {
+body.dark-mode .logo,
+body.dark-mode .simple-link:hover {
   color: #ffffff;
 }
 
@@ -429,7 +454,8 @@ body.dark-mode .new-topic-wrapper > a:hover,
 body.dark-mode .message-editor,
 body.dark-mode .message:not(:first-child):before,
 body.dark-mode .new-topic-title,
-body.dark-mode .topic-title h2 {
+body.dark-mode .topic-title h2,
+body.dark-mode .footer {
   border-color: #464646;
 }
 
@@ -440,10 +466,6 @@ body.dark-mode pre code {
 
 .new-message-header {
   display: flex;
-}
-
-.text-small {
-  font-size: 12px;
 }
 
 .new-topic-title {
@@ -457,28 +479,9 @@ body.dark-mode pre code {
   font-size: 16px;
 }
 
-pre code:before {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  background: #ececec;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  padding: 2px 5px;
-  font-size: 12px;
-  font-family: 'Inter UI';
-  padding: 1px 8px;
-  z-index: 999;
-  border-radius: 4px 0 0 0;
-}
-
 pre code {
   position: relative;
 }
-
-pre code.rb:before,
-pre code.ruby:before { content: 'Ruby'; }
-pre code.js:before { content: 'JavaScript'; }
 
 .dark-mode pre code:before {
   position: absolute;
@@ -487,9 +490,20 @@ pre code.js:before { content: 'JavaScript'; }
 }
 
 .flash {
-  padding: 10px;
-  border: 1px solid #ccc;
-  background: #ececec;
+  padding: 20px;
+  border: 1px solid #FFC107;
+  color: #000000;
+  background: #ffffff;
+  margin: 20px 0;
+  border-left-color: #FFC107;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.flash > svg {
+  color: #FFC107;
+  margin-right: 10px;
 }
 
 .signup-form > section {
