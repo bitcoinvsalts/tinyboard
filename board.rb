@@ -16,12 +16,11 @@ configure(:development) do
   also_reload "board_db.rb"
 end
 
-helpers do
-end
-
 before do
+  session[:dark_mode] ||= false
+  session[:user] ||= false
   @database = BoardDB.new
-  session ||= {dark_mode: false}
+  @user = session[:user]
 end
 
 after do
@@ -33,13 +32,12 @@ not_found do
 end
 
 get "/" do
-  @user = session[:user]
   @topics = @database.recent_topics
   erb :home
 end
 
 get "/join" do
-  if session[:user]
+  if @user
     session[:error] = "You've already joined!"
     redirect "/"
   end
@@ -48,7 +46,6 @@ get "/join" do
 end
 
 post "/join" do
-  @user = session[:user]
   initials = params["initials"].strip.upcase
 
   if /^[A-Z]{2}$/ =~ initials
@@ -61,8 +58,6 @@ post "/join" do
 end
 
 get "/topic/new" do
-  @user = session[:user]
-
   if !@user
     session[:error] = 'You must join to make a topic!'
     redirect "/"
@@ -72,7 +67,6 @@ get "/topic/new" do
 end
 
 post "/topic/new" do
-  @user = session[:user]
   topic_title = params["title"].strip
   content = params["content"].strip
 
@@ -86,35 +80,29 @@ post "/topic/new" do
 end
 
 get "/topic/:id" do
-  @user = session[:user]
   @topic = @database.topic(params["id"])
 
   if !@topic[:id]
     session[:error] = 'Topic not found!'
     redirect "/"
-  else
-    erb :topic
   end
+
+  erb :topic
 end
 
 post "/topic/:id" do
-  @user = session[:user]
   content = params["content"].strip
-  topic_id = params["id"]
-  author_initials = @user[:initials]
-  author_theme = @user[:theme]
 
   if content.empty?
     session[:error] = "Message must not be blank!"
-    redirect "/topic/#{topic_id}"
+    redirect "/topic/#{params["id"]}"
   else
-    @database.add_message(topic_id, content, author_initials, author_theme)
-    redirect "/topic/#{topic_id}"
+    @database.add_message(params["id"], content, @user[:initials], @user[:theme])
+    redirect "/topic/#{params["id"]}"
   end
 end
 
 post "/options" do
-  @user = session[:user]
   session[:dark_mode] = (params["darkMode"] == "true")
   redirect "/"
 end
