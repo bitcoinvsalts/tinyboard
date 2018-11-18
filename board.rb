@@ -87,9 +87,14 @@ end
 
 get "/topic/:id" do
   @user = session[:user]
-  @topic_id = params["id"]
-  @topic = @database.topic(@topic_id)
-  erb :topic
+  @topic = @database.topic(params["id"])
+
+  if !@topic[:id]
+    session[:error] = 'Topic not found!'
+    redirect "/"
+  else
+    erb :topic
+  end
 end
 
 post "/topic/:id" do

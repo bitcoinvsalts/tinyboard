@@ -25,7 +25,7 @@
 <section class="divider"></section>
 
 <% if @user %>
-  <form class="new-message-wrapper" method="post" action="/topic/<%= @topic_id %>">
+  <form class="new-message-wrapper" method="post" action="/topic/<%= @topic[:id] %>">
     <section class="new-message-header">
       <label>Reply</label>
       <span class="mla text-small">Markdown supported</span>

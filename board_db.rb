@@ -36,20 +36,23 @@ class BoardDB
 
   def topic(id)
     sql = 'SELECT * FROM topics INNER JOIN messages ON topics.id = messages.topic_id WHERE topic_id = $1 ORDER BY posted;'
-    messages_result = @db.exec_params(sql, [id]);
+    result = @db.exec_params(sql, [id]);
 
-    title = messages_result.first["title"]
-    messages = messages_result.map do |tuple|
-      formatted_date = DateTime.parse(tuple["posted"]).strftime("%B %d, %Y @ %I:%M%p")
-      formatted_content = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true).render(tuple["content"])
+    if result.first
+      messages = result.map do |tuple|
+        formatted_date = DateTime.parse(tuple["posted"]).strftime("%B %d, %Y @ %I:%M%p")
+        formatted_content = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true).render(tuple["content"])
 
-      { content: formatted_content,
-        author_initials: tuple["author_initials"],
-        author_theme: tuple["author_theme"],
-        posted: formatted_date }
+        { content: formatted_content,
+          author_initials: tuple["author_initials"],
+          author_theme: tuple["author_theme"],
+          posted: formatted_date }
+      end
+
+      {id: result.first["topic_id"], title: result.first["title"], messages: messages}
+    else
+      {}
     end
-
-    {title: title, messages: messages}
   end
 
   def add_message(topic_id, content, author_initials, author_theme)
