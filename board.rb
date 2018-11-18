@@ -28,6 +28,10 @@ after do
   @database.disconnect
 end
 
+not_found do
+  erb :not_found
+end
+
 get "/" do
   @user = session[:user]
   @topics = @database.recent_topics
