@@ -43,7 +43,8 @@ get "/" do
     FROM topics
     INNER JOIN messages
     ON topics.id = messages.topic_id
-    ORDER BY last_message DESC;
+    ORDER BY last_message DESC
+    LIMIT 50;
   SQL
 
   topics_result = @db.exec(sql);
@@ -98,21 +99,25 @@ post "/options" do
 end
 
 get "/join" do
-  @user = session[:user]
+  if session[:user]
+    session[:error] = "You've already joined!"
+    redirect "/"
+  end
+
   erb :join
 end
 
 post "/join" do
   @user = session[:user]
-  initials = params["initials"].strip
+  initials = params["initials"].strip.upcase
 
-  if initials.size != 2
-    session[:error] = 'Initials must be two characters.'
-    erb :join
-  else
+  if /^[A-Z]{2}$/ =~ initials
     theme = params["theme"]
     session[:user] = { initials: initials, theme: theme }
     redirect "/"
+  else
+    session[:error] = 'Initials must be two alphabetical characters.'
+    erb :join
   end
 end
 
