@@ -22,7 +22,7 @@ before do
   @db = if Sinatra::Base.production?
     PG.connect(ENV['DATABASE_URL'])
   else
-    PG.connect(dbname: "tinyboard")
+    PG.connect(dbname: 'tinyboard')
   end
 
   session ||= {dark_mode: false}
@@ -32,8 +32,10 @@ after do
   @db.close
 end
 
+# Homepage
 get "/" do
   @user = session[:user]
+
   sql = <<~SQL
     SELECT DISTINCT topics.*,
      (SELECT COUNT(messages.id) FROM messages WHERE topic_id = topics.id) AS "message_count",
@@ -60,6 +62,7 @@ get "/" do
   erb :home
 end
 
+# View a topic
 get "/topic/:id" do
   @user = session[:user]
   @topic_id = params["id"]
@@ -80,6 +83,7 @@ get "/topic/:id" do
   erb :topic
 end
 
+# POST for adding a message to a topic
 post "/topic/:id" do
   @user = session[:user]
   content = params["content"]
@@ -92,12 +96,14 @@ post "/topic/:id" do
   redirect "/topic/#{topic_id}"
 end
 
+# POST for setting user options (currently only dark/light mode)
 post "/options" do
   @user = session[:user]
   session[:dark_mode] = (params["darkMode"] == "true")
   redirect "/"
 end
 
+# Display join form
 get "/join" do
   if session[:user]
     session[:error] = "You've already joined!"
@@ -107,6 +113,7 @@ get "/join" do
   erb :join
 end
 
+# Handle join form
 post "/join" do
   @user = session[:user]
   initials = params["initials"].strip.upcase
@@ -121,24 +128,32 @@ post "/join" do
   end
 end
 
+# Display new topic form
 get "/new-topic" do
   @user = session[:user]
   redirect "/" if !session[:user]
   erb :new_topic
 end
 
+# Handle new topic form
 post "/topics/new" do
-  topic_title = params["title"]
-  content = params["content"]
+  @user = session[:user]
+  topic_title = params["title"].strip
+  content = params["content"].strip
   author_theme = session[:user][:theme]
   author_initials = session[:user][:initials]
 
-  topics_sql = 'INSERT INTO topics (title) VALUES ($1) RETURNING id;'
-  insert_result = @db.exec_params(topics_sql, [topic_title])
-  topic_id = insert_result.first["id"]
+  if content.empty? || topic_title.empty?
+    session[:error] = "Title and message must not be blank!"
+    erb :new_topic
+  else
+    topics_sql = 'INSERT INTO topics (title) VALUES ($1) RETURNING id;'
+    insert_result = @db.exec_params(topics_sql, [topic_title])
+    topic_id = insert_result.first["id"]
 
-  message_sql = 'INSERT INTO messages (topic_id, content, author_initials, author_theme) VALUES ($1, $2, $3, $4)'
-  @db.exec_params(message_sql, [topic_id, content, author_initials, author_theme])
+    message_sql = 'INSERT INTO messages (topic_id, content, author_initials, author_theme) VALUES ($1, $2, $3, $4)'
+    @db.exec_params(message_sql, [topic_id, content, author_initials, author_theme])
 
-  redirect "/"
+    redirect "/"
+  end
 end
