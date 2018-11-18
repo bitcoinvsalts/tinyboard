@@ -86,14 +86,19 @@ end
 # POST for adding a message to a topic
 post "/topic/:id" do
   @user = session[:user]
-  content = params["content"]
+  content = params["content"].strip
   topic_id = params["id"]
   author_initials = @user[:initials]
   author_theme = @user[:theme]
-  sql = 'INSERT INTO messages (topic_id, content, author_initials, author_theme) VALUES ($1, $2, $3, $4)'
 
-  @db.exec_params(sql, [topic_id, content, author_initials, author_theme])
-  redirect "/topic/#{topic_id}"
+  if content.empty?
+    session[:error] = "Message must not be blank!"
+    redirect "/topic/#{topic_id}"
+  else
+    sql = 'INSERT INTO messages (topic_id, content, author_initials, author_theme) VALUES ($1, $2, $3, $4)'
+    @db.exec_params(sql, [topic_id, content, author_initials, author_theme])
+    redirect "/topic/#{topic_id}"
+  end
 end
 
 # POST for setting user options (currently only dark/light mode)
