@@ -1,21 +1,21 @@
-require "sinatra"
-require "sinatra/content_for"
-require "tilt/erubis"
-require "date"
-require "redcarpet"
-require "dotenv/load"
+require 'sinatra'
+require 'sinatra/content_for'
+require 'tilt/erubis'
+require 'date'
+require 'redcarpet'
+require 'dotenv/load'
 
-require_relative "./db/board_db"
+require_relative './db/board_db'
 
 configure do
   enable :sessions
   set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
-  set :erb, :escape_html => true
+  set :erb, escape_html: true
 end
 
 configure(:development) do
-  require "sinatra/reloader"
-  also_reload "./db/board_db.rb"
+  require 'sinatra/reloader'
+  also_reload './db/board_db.rb'
 end
 
 before do
@@ -34,47 +34,47 @@ not_found do
   erb :not_found
 end
 
-get "/" do
+get '/' do
   @topics = @database.recent_topics
   erb :home
 end
 
-get "/join" do
+get '/join' do
   if @user
     session[:error] = "You've already joined!"
-    redirect "/"
+    redirect '/'
   end
 
   erb :join
 end
 
-post "/join" do
-  initials = params["initials"].strip.upcase
+post '/join' do
+  initials = params['initials'].strip.upcase
 
   if /^[A-Z]{2}$/ =~ initials
-    session[:user] = { initials: initials, theme: params["theme"] }
-    redirect "/"
+    session[:user] = { initials: initials, theme: params['theme'] }
+    redirect '/'
   else
     session[:error] = 'Initials must be two alphabetical characters.'
     erb :join
   end
 end
 
-get "/topic/new" do
+get '/topic/new' do
   if !@user
     session[:error] = 'You must join to make a topic!'
-    redirect "/"
+    redirect '/'
   end
 
   erb :new_topic
 end
 
-post "/topic/new" do
-  topic_title = params["title"].strip
-  content = params["content"].strip
+post '/topic/new' do
+  topic_title = params['title'].strip
+  content = params['content'].strip
 
   if content.empty? || topic_title.empty?
-    session[:error] = "Title and message must not be blank!"
+    session[:error] = 'Title and message must not be blank!'
     erb :new_topic
   else
     topic_id = @database.add_topic(topic_title, content, @user[:initials], @user[:theme])
@@ -82,30 +82,30 @@ post "/topic/new" do
   end
 end
 
-get "/topic/:id" do
-  @topic = @database.topic(params["id"].to_i)
+get '/topic/:id' do
+  @topic = @database.topic(params['id'].to_i)
 
   if !@topic[:id]
     session[:error] = 'Topic not found!'
-    redirect "/"
+    redirect '/'
   end
 
   erb :topic
 end
 
-post "/topic/:id" do
-  content = params["content"].strip
+post '/topic/:id' do
+  content = params['content'].strip
 
   if content.empty?
-    session[:error] = "Message must not be blank!"
-    redirect "/topic/#{params["id"]}"
+    session[:error] = 'Message must not be blank!'
   else
-    @database.add_message(params["id"], content, @user[:initials], @user[:theme])
-    redirect "/topic/#{params["id"]}"
+    @database.add_message(params['id'], content, @user[:initials], @user[:theme])
   end
+
+  redirect "/topic/#{params['id']}"
 end
 
-post "/options" do
-  session[:dark_mode] = (params["darkMode"] == "true")
-  redirect "/"
+post '/options' do
+  session[:dark_mode] = (params['darkMode'] == 'true')
+  redirect '/'
 end
