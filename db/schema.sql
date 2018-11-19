@@ -1,3 +1,5 @@
+CREATE TYPE color AS enum ('black', 'gray', 'blue', 'purple', 'red', 'orange', 'green');
+
 CREATE TABLE topics (
   id serial PRIMARY KEY,
   title text NOT NULL
@@ -8,6 +10,6 @@ CREATE TABLE messages (
   topic_id integer REFERENCES topics (id) NOT NULL,
   content text NOT NULL,
   author_initials char(2) NOT NULL,
-  author_theme text,
+  author_theme color NOT NULL,
   posted timestamp NOT NULL DEFAULT NOW()
 );
