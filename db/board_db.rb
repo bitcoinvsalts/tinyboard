@@ -4,6 +4,8 @@ class BoardDB
   def initialize
     @db = if Sinatra::Base.production?
       PG.connect(ENV['DATABASE_URL'])
+    elsif Sinatra::Base.test?
+      PG.connect(dbname: 'tinyboard_test')
     else
       PG.connect(dbname: 'tinyboard')
     end

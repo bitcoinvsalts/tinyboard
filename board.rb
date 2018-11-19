@@ -3,7 +3,7 @@ require "sinatra/content_for"
 require "tilt/erubis"
 require "date"
 require "redcarpet"
-require_relative "board_db"
+require_relative "./db/board_db"
 
 configure do
   enable :sessions
@@ -13,10 +13,11 @@ end
 
 configure(:development) do
   require "sinatra/reloader"
-  also_reload "board_db.rb"
+  also_reload "./db/board_db.rb"
 end
 
 before do
+  content_type :html, 'charset' => 'utf-8'
   session[:dark_mode] ||= false
   session[:user] ||= false
   @database = BoardDB.new
@@ -80,7 +81,7 @@ post "/topic/new" do
 end
 
 get "/topic/:id" do
-  @topic = @database.topic(params["id"])
+  @topic = @database.topic(params["id"].to_i)
 
   if !@topic[:id]
     session[:error] = 'Topic not found!'

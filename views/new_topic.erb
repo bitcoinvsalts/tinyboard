@@ -10,9 +10,7 @@
   </section>
   <textarea name="content" class="message-editor" required></textarea>
   <section class="new-message-footer">
-    <span class="user-logo <%= @user[:theme] %>">
-      <%= @user[:initials] %>
-    </span>
+    <span class="user-logo <%= @user[:theme] %>"><%= @user[:initials] %></span>
     <button type="submit" class="button theme-<%= @user[:theme] %>">Post</button>
   </section>
 </form>
