@@ -43,7 +43,7 @@ class BoardDB
     if result.first
       messages = result.map do |tuple|
         formatted_date = DateTime.parse(tuple["posted"]).strftime("%B %d, %Y @ %I:%M%p")
-        formatted_content = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true).render(tuple["content"])
+        formatted_content = Redcarpet::Markdown.new(Redcarpet::Render::Safe, fenced_code_blocks: true).render(tuple["content"])
 
         { content: formatted_content,
           author_initials: tuple["author_initials"],

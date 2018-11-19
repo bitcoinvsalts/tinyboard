@@ -10,3 +10,10 @@ end
 task :test do
   ruby "-W0 ./test/board_test.rb"
 end
+
+task :seed_db do
+  `dropdb --if-exists tinyboard`
+  `createdb tinyboard`
+  `psql -d tinyboard < ./db/schema.sql`
+  `psql -d tinyboard < ./db/seeds.sql`
+end
