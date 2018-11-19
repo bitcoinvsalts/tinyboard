@@ -6,7 +6,7 @@
   <section class="topic-messages">
     <% @topic[:messages].each do |message| %>
       <section class="message">
-        <%== message[:content] %>
+        <%= message[:content] %>
         <span class="message-footer">
           <span class="user-logo <%= message[:author_theme] %>">
             <%= message[:author_initials] %>
