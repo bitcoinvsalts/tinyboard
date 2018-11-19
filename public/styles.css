@@ -292,7 +292,22 @@ pre code {
   font-weight: bold;
   letter-spacing: 0px;
   font-size: 18px;
-  margin: 0 auto 10px auto;
+  margin: 0 auto 20px auto;
+  border-bottom: 1px solid #eee;
+  max-width: 300px;
+  padding-bottom: 20px;
+}
+
+.signup-form-label {
+  flex: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.signup-form-color-section {
+  justify-content: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
 }
 
 .signup-form input[type="text"] {
@@ -423,7 +438,8 @@ body.dark-mode .new-topic-title,
 body.dark-mode .message > p > a,
 body.dark-mode .logo,
 body.dark-mode .simple-link:hover,
-body.dark-mode .flash {
+body.dark-mode .flash,
+body.dark-mode .signup-form-label {
   color: #ffffff;
 }
 
@@ -490,6 +506,10 @@ body.dark-mode pre code {
 
 .signup-form > section {
   flex-wrap: wrap;
+}
+
+.not-found {
+  text-align: center;
 }
 
 @media only screen and (max-width: 500px) {
