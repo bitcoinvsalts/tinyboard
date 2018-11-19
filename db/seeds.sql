@@ -4,7 +4,7 @@ VALUES ('Anyone have experience training hippos?'),
        ('Share your best NBA gifs!');
 
 INSERT INTO messages (topic_id, author_initials, author_theme, content)
-VALUES (1, 'JK', 'blue', 'Does anyone have experience raising young hippos?
+VALUES (1, 'JK', 'black', 'Does anyone have experience raising young hippos?
 
 I''m trying to housetrain one I got for my birthday but we''ve had a few, shall we say, "accidents" so far.
 
@@ -17,7 +17,7 @@ Then you can begin training the hippo to actually ring a bell to let you know wh
        (2, 'YM', 'green', 'Check out this [Instrumental Lofi playlist on Spotify](https://open.spotify.com/user/spotify/playlist/37i9dQZF1DXc8kgYqQLMfH?si=IfYoL7gyTp-75RCbeEc_9A).
 
 I''ve been digging so many songs off this.'),
-       (2, 'JK', 'blue', 'I LOVE THIS. Thanks for sharing!'),
+       (2, 'JK', 'black', 'I LOVE THIS. Thanks for sharing!'),
        (2, 'HK', 'orange', 'Hey I know this playlist! It''s one of my favs.'),
        (2, 'YM', 'green', '@HK, good taste! :)'),
        (2, 'KB', 'purple', '![10/10](https://i.imgur.com/06bFgD2.gif)
