@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-ruby "2.5.1"
+ruby "2.6.1"
 
-gem "sinatra", "~>1.4.7"
+gem "sinatra"
 gem "minitest"
 gem "minitest-reporters"
 gem "sinatra-contrib"
