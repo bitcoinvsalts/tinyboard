@@ -7,6 +7,8 @@ require 'dotenv/load'
 
 require_relative './db/board_db'
 
+set :bind, '0.0.0.0'
+
 configure do
   enable :sessions
   set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }

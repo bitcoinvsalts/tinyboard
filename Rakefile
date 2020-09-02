@@ -12,8 +12,11 @@ task :test do
 end
 
 task :seed_db do
+  `psql -d tinyboard < ./db/seeds.sql`
+end
+
+task :create_db do
   `dropdb --if-exists tinyboard`
   `createdb tinyboard`
   `psql -d tinyboard < ./db/schema.sql`
-  `psql -d tinyboard < ./db/seeds.sql`
 end

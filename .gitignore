@@ -3,3 +3,4 @@
 .env
 
 db/backup.sql
+postgres-data/*

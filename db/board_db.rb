@@ -2,8 +2,8 @@ require "pg"
 
 class BoardDB
   def initialize
-    @db = if Sinatra::Base.production?
-      PG.connect(ENV['DATABASE_URL'])
+    @db = if ENV['DATABASE_URL']
+      PG.connect({ host: ENV['DATABASE_URL'], user: 'postgres' })
     elsif Sinatra::Base.test?
       PG.connect(dbname: 'tinyboard_test')
     else
