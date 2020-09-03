@@ -1,4 +1,5 @@
 require 'sinatra'
+require "sinatra/reloader" if development?
 require 'sinatra/content_for'
 require 'tilt/erubis'
 require 'date'
@@ -6,6 +7,8 @@ require 'redcarpet'
 require 'dotenv/load'
 
 require_relative './db/board_db'
+
+set :bind, '0.0.0.0'
 
 configure do
   enable :sessions

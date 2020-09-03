@@ -1,0 +1,17 @@
+version: '3'
+services:
+  tinyboard:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "4567:4567"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgres
+      - DATABASE_USER=postgres
+  postgres:
+    image: "postgres:11.5"
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres-data:/var/lib/postgresql/data
