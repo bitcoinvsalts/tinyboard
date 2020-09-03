@@ -9,6 +9,7 @@ services:
     environment:
       - NODE_ENV=development
       - DATABASE_URL=postgres
+      - DATABASE_USER=postgres
   postgres:
     image: "postgres:11.5"
     volumes:
